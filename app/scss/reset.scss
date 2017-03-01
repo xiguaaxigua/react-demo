@@ -1,0 +1,332 @@
+html {
+  background: #fff;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  border: 0;
+  font: 12px Helvetica Neue, Hiragino Sans GB, '宋体', 'simsun', '黑体', Arial, sans-serif;
+  line-height: 1.5;
+  margin: 0;
+  padding: 0;
+  background: #F8F8F8;
+  overflow: hidden;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  cursor: default;
+}
+
+div,
+span,
+object,
+iframe,
+img,
+table,
+caption,
+thead,
+tbody,
+tfoot,
+tr,
+tr,
+td,
+article,
+aside,
+canvas,
+details,
+figure,
+hgroup,
+menu,
+nav,
+footer,
+header,
+section,
+summary,
+mark,
+audio,
+video {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+address,
+cit,
+code,
+del,
+dfn,
+em,
+ins,
+q,
+samp,
+small,
+strong,
+sub,
+sup,
+b,
+i,
+hr,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+legend,
+label {
+  border: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  margin: 0;
+  padding: 0;
+}
+
+article,
+aside,
+canvas,
+figure,
+figure img,
+figcaption,
+hgroup,
+footer,
+header,
+nav,
+section,
+audio,
+video {
+  display: block;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+table caption,
+table th,
+table td {
+  text-align: left;
+  vertical-align: middle;
+}
+
+a img {
+  border: 0;
+}
+
+:focus {
+  outline: 0;
+}
+
+a {
+  text-decoration: none;
+  color: #2DBFC6;
+  outline: none;
+  cursor: pointer;
+}
+
+input::-ms-clear {
+  display: none;
+}
+
+input,
+textarea {
+  padding: 0;
+  margin: 0;
+  border: none;
+  outline: none;
+}
+
+select {
+  -webkit-appearance: none;
+  border: 0;
+  background-color: transparent;
+  font-family: inherit;
+}
+
+input,
+textarea {
+  border: 1px solid #e0e1e5;
+  border-radius: 2px;
+  line-height: 22px;
+  padding: 5px 10px;
+}
+
+input,
+textarea {
+  webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
+  -moz-transition: border linear 0.2s, box-shadow linear 0.2s;
+  -ms-transition: border linear 0.2s, box-shadow linear 0.2s;
+  -o-transition: border linear 0.2s, box-shadow linear 0.2s;
+  transition: border linear 0.2s, box-shadow linear 0.2s;
+}
+
+textarea {
+  resize: none;
+}
+
+input[type=radio] {
+  box-shadow: none;
+  border: none;
+  padding: 0px;
+}
+
+ul {
+  list-style: none;
+}
+
+h1 {
+  font-size: 18px;
+}
+
+h2 {
+  font-size: 16px;
+}
+
+h3 {
+  font-size: 14px;
+}
+
+h4 {
+  font-size: 12px;
+}
+
+body.mac {
+  font-family: Helvetica Neue, Hiragino Sans GB, Microsoft Yahei, WenQuanYi Micro Hei, sans-serif;
+}
+
+.ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  -webkit-text-overflow: ellipsis;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.selectable {
+  -webkit-user-select: text;
+  cursor: text;
+}
+
+.word-break {
+  word-break: break-all;
+  word-wrap: break-word;
+}
+
+.red,
+.error {
+  color: #fd3232;
+}
+
+.text {
+  line-height: 18px;
+  padding: 2px;
+  border: 1px solid #cbd3d7;
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) inset;
+  width: 84px;
+  -webkit-user-select: text;
+  cursor: text;
+}
+
+.text:hover {
+  border-color: #999999;
+}
+
+input[type=radio].checkbox,
+input[type=checkbox].checkbox {
+  width: 12px;
+  height: 16px;
+  cursor: pointer;
+}
+
+::-webkit-scrollbar {
+  height: 8px;
+  width: 10px;
+  background: transparent;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-button {
+  display: none;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-track-piece {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  width: 10px;
+  min-height: 15px;
+  background: rgba(118, 176, 243, 0.3);
+  border-radius: 0;
+  margin-right: 1px;
+}
+
+.placeholder,
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder {
+  color: #c5c5c5;
+  font-size: 14px;
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+::selection {
+  background: rgba(45, 191, 198, 0.3);
+  color: #555;
+}
+
+::-moz-selection {
+  background: rgba(45, 191, 198, 0.3);
+  color: #555;
+}
+
+::-webkit-selection {
+  background: rgba(45, 191, 198, 0.3);
+  color: #555;
+}
+
+figure:after, .clearfix:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden
+}
+
+input[type="text"], input[type="password"]{
+  -webkit-appearance: none;
+  &:focus {
+    border-color: #31C7FF;
+    box-shadow: none;
+    -webkit-box-shadow: none
+  }
+}
