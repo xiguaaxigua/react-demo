@@ -81,7 +81,7 @@ class EraseConfirmModal extends Component {
   render() {
     let userName;
     if (cookie.load('nickname')) {
-      userName = encodeURI(cookie.load('nickname'));
+      userName = decodeURI(cookie.load('nickname'));
     } else {
       userName = cookie.load('AccountID') || '游客';
     }
