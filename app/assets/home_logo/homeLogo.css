@@ -1,0 +1,52 @@
+.hl {
+  background-image: url('home-logo.png');
+}
+
+.hl-84{
+  zoom: 0.5;
+  -moz-transform: scale(0.5);
+  -moz-transform-origin: 0 0;
+}
+
+.hl-54 {
+  zoom: 0.333333333;
+  -moz-transform: scale(0.333333333);
+  -moz-transform-origin: 0 0;
+}
+
+.hl-24{
+  zoom: 0.142857142;
+  -moz-transform: scale(0.142857142);
+  -moz-transform-origin: 0 0;
+}
+
+.hl-contact-logo {
+  background-position: -0px -0px;
+  width: 168px;
+  height: 168px;
+}
+.hl-find-logo {
+  background-position: -168px -0px;
+  width: 168px;
+  height: 168px;
+}
+.hl-home-logo {
+  background-position: -0px -168px;
+  width: 168px;
+  height: 168px;
+}
+.hl-msg-logo {
+  background-position: -168px -168px;
+  width: 168px;
+  height: 168px;
+}
+.hl-note-logo {
+  background-position: -336px -0px;
+  width: 168px;
+  height: 168px;
+}
+.hl-record-logo {
+  background-position: -336px -168px;
+  width: 168px;
+  height: 168px;
+}

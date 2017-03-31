@@ -9,7 +9,7 @@ module.exports = {
     inline: true,
     progress: true,
     contentBase: './app',
-    port: 8080
+    port: 8082
   },
   entry: [
     'webpack/hot/dev-server',
@@ -23,6 +23,11 @@ module.exports = {
   },
   module: {
     loaders: [
+      {
+        include: /fonts\//,
+        test: /\.(eot|woff|woff2|svg|ttf)([\?]?.*)$/,
+        loader: "file-loader?name=[name].[ext]&publicPath=assets/icon_fonts/fonts/&outputPath=assets/icon_fonts/fonts/"
+      },
       {
         test: /\.scss$/,
         include: path.resolve(__dirname, 'app'),
@@ -51,6 +56,6 @@ module.exports = {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new OpenBrowserPlugin({url: 'http://localhost:8080'})
+    new OpenBrowserPlugin({url: 'http://localhost:8082'})
   ]
 };

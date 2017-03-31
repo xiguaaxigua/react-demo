@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 11</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-11">
+            <g id="web_clear_normal_right">
+                <g>
+                    <rect id="Rectangle-Copy-2" x="0" y="0" width="24" height="24"></rect>
+                    <g id="Group-79" transform="translate(3.000000, 1.000000)">
+                        <path d="M11,9.55555556 L11,0.50160264 C11,0.216278315 10.7804053,0 10.5095215,0 L7.49047852,0 C7.21505737,0 7,0.224575151 7,0.50160264 L7,9.55555556 L6.94572566,9.55555556 L0.477407853,11.1260832 C0.215488188,11.1896781 0,11.46575 0,11.7417604 L0,14.1111111 L18,14.1111111 L18,11.7417604 C18,11.4671337 17.7829437,11.1889059 17.5151913,11.1234119 L11.1054875,9.55555556 L11,9.55555556 Z M0,22 L18,22 L18,15 L0,15 L0,22 Z" id="Combined-Shape" fill-opacity="0.26" fill="#000000"></path>
+                        <g id="Rectangle-77" transform="translate(0.000000, 15.000000)"></g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->
+    <title>web_locking_disable_right</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M9.5,6.56154333 C10.0825962,6.76746153 10.5,7.32308106 10.5,7.97619048 C10.5,8.8046176 9.82842712,9.47619048 9,9.47619048 C8.17157288,9.47619048 7.5,8.8046176 7.5,7.97619048 C7.5,7.32308106 7.91740381,6.76746153 8.5,6.56154333 L8.5,4.46666899 C8.5,4.19578519 8.73193359,3.97619048 9,3.97619048 C9.27614237,3.97619048 9.5,4.19124785 9.5,4.46666899 L9.5,6.56154333 Z M0.5,0.59726261 C0.5,0.32158042 0.714942813,0.0980958484 0.99044323,0.0980958484 L17.0095568,0.0980958484 C17.2804211,0.0980958484 17.5,0.326214745 17.5,0.59726261 L17.5,12.7417862 C17.5,13.0174684 17.2850572,13.240953 17.0095568,13.240953 L0.99044323,13.240953 C0.719578913,13.240953 0.5,13.0128341 0.5,12.7417862 L0.5,0.59726261 Z" id="path-1"></path>
+    </defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="web_locking_disable_right">
+            <g id="web_locking_pressed_right">
+                <g id="password" transform="translate(3.000000, 1.000000)">
+                    <path d="M15.3500242,9 L15.3500242,6.34604127 C15.3500242,2.84681207 12.5070324,0 9.00002432,0 C5.50015227,0 2.65002441,2.84121945 2.65002441,6.34604127 L2.65002441,9 L4.45002441,9 L4.45002441,6.34604127 C4.45002441,3.83835753 6.49123672,1.8 9.00002432,1.8 C11.5109944,1.8 13.5500242,3.83899915 13.5500242,6.34604127 L13.5500242,9 L15.3500242,9 Z" id="Combined-Shape" fill="#BDBDBD"></path>
+                    <g id="Rectangle-330" transform="translate(0.000000, 8.761905)">
+                        <mask id="mask-2" fill="white">
+                            <use xlink:href="#path-1"></use>
+                        </mask>
+                        <use id="Combined-Shape" fill="#BDBDBD" xlink:href="#path-1"></use>
+                    </g>
+                </g>
+                <rect id="password" x="0" y="0" width="24" height="24"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

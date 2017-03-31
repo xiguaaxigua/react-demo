@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="62px" height="78px" viewBox="0 0 62 78" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->
+    <title>web_locking_disable</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M54.095202,51.6792092 C59.0106263,46.1932272 62,38.9457164 62,31 C62,13.8791728 48.1208272,0 31,0 C13.8791728,0 0,13.8791728 0,31 C0,38.8132612 2.89053863,45.9514009 7.66058806,51.4033914 L31,78 L54.0951966,51.6792152 Z" id="path-1"></path>
+        <filter x="-50%" y="-50%" width="200%" height="200%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="3" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.1 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="web_locking_disable">
+            <g id="Group-6-Copy">
+                <g id="web_-phone-position_normal_right">
+                    <g id="Group-14">
+                        <g>
+                            <g id="Combined-Shape">
+                                <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                                <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-1"></use>
+                            </g>
+                            <path d="M31,59 C46.463973,59 59,46.463973 59,31 C59,15.536027 46.463973,3 31,3 C15.536027,3 3,15.536027 3,31 C3,46.463973 15.536027,59 31,59 Z" id="Oval-4" fill="#BDBDBD"></path>
+                            <g id="web_locking_normal_right_" transform="translate(13.000000, 13.000000)">
+                                <g id="web_locking_normal_right_yellow-copy-3">
+                                    <g id="zs_svg_phone">
+                                        <g id="Group-3" transform="translate(6.000000, 3.750000)" fill="#FFFFFF">
+                                            <path d="M7.5,27 L0,27 L0,0 L18,0 L18,9.15091952 C17.6358892,9.05244213 17.2538101,9 16.8599104,9 C16.477057,9 16.1051751,9.04964657 15.75,9.14306608 L15.75,3.375 L2.25,3.375 L2.25,21.6 L7.5,21.6 L7.5,27 Z" id="Combined-Shape"></path>
+                                            <path d="M22.5146104,18.1948052 L22.5146104,16.5120097 C22.5146104,13.3043829 19.9962121,10.6948052 16.8896104,10.6948052 C13.78933,10.6948052 11.2646104,13.2992564 11.2646104,16.5120097 L11.2646104,18.1948052 L10.1334627,18.1948052 C9.73108957,18.1948052 9.38961039,18.5328902 9.38961039,18.9499393 L9.38961039,27.9396711 C9.38961039,28.3573436 9.72264442,28.6948052 10.1334627,28.6948052 L23.6457581,28.6948052 C24.0481312,28.6948052 24.3896104,28.3567201 24.3896104,27.9396711 L24.3896104,18.9499393 C24.3896104,18.5322668 24.0565764,18.1948052 23.6457581,18.1948052 L22.5146104,18.1948052 Z M12.8590986,18.1948052 L12.8590986,16.5120097 C12.8590986,14.2132996 14.6672591,12.3448052 16.8896104,12.3448052 C19.1138949,12.3448052 20.9201222,14.2138877 20.9201222,16.5120097 L20.9201222,18.1948052 L12.8590986,18.1948052 Z" id="Combined-Shape-Copy"></path>
+                                        </g>
+                                        <rect x="0" y="0" width="36" height="36"></rect>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

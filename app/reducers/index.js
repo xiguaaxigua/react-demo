@@ -3,10 +3,10 @@
  * Created by jason.liu on 17/2/8.
  */
 import { combineReducers } from 'redux';
-import helloReducer from './helloReducer';
+import phoneReducer from './phoneReducer';
 
 const rootReducer = combineReducers({
-  helloReducer
+  phoneReducer
 });
 
 export default rootReducer;

@@ -1,0 +1,61 @@
+/**
+ * Created by jason.liu on 17/2/11.
+ */
+.modal {
+  .bg-gray {
+    background: rgba(247, 247, 247, 1);
+  }
+  .modal-header {
+    height: 58px;
+    padding: 0 24px;
+    position: relative;
+    font-size: 16px;
+    color: #333;
+    line-height: 58px;
+    .icon-clear, .icon_clear {
+      position: absolute;
+      top: 17px;
+      right: 24px;
+      cursor: pointer;
+    }
+  }
+  .modal-content {
+    margin: 8px 0;
+    overflow: hidden;
+    line-height: 18px;
+    padding: 0 24px;
+    min-width: 303px;
+    color: #666;
+    font-size: 12px;
+  }
+  .modal-footer {
+    padding: 13px 24px;
+    .btn{
+      width: 100%;
+    }
+  }
+}
+
+.dark-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 90;
+  background: rgba(10, 27, 46, 0.30);
+  .modal-wrap-content {
+    border: none !important;
+    background: #313e50 !important;
+  }
+  .modal-header {
+    color: #fff;
+    background: #313e50;
+  }
+  .modal-content {
+    background: #2C3746;
+  }
+  .modal-footer {
+    background: #313e50;
+  }
+}

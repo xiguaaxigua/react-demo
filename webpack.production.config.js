@@ -4,7 +4,8 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const uglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
-const extractCSS = new ExtractTextPlugin('./build.css');
+
+const extractCSS = new ExtractTextPlugin('./bundle.css');
 
 module.exports = {
   devtool: 'cheap-source-map',
@@ -13,9 +14,10 @@ module.exports = {
       'react',
       'react-dom',
       'redux',
-      'react-redux'
+      'react-redux',
+      'react-cookie'
     ],
-    app: path.resolve(__dirname, 'app/main.jsx')
+    app: path.resolve(__dirname, 'app/main.js')
   },
   output: {
     path: path.resolve(__dirname, 'build'),
@@ -25,15 +27,15 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /\.scss$/,
+        include: /fonts\//,
+        test: /\.(eot|woff|woff2|svg|ttf)([\?]?.*)$/,
+        loader: "file-loader?name=[name].[ext]&publicPath=assets/icon_fonts/fonts/&outputPath=assets/icon_fonts/fonts/"
+      },
+      {
+        test: /\.(scss|css)$/,
         include: path.resolve(__dirname, 'app'),
         sourceMap: false,
         loader: extractCSS.extract(['css-loader', 'sass-loader'])
-      },
-      {
-        test: /\.css$/,
-        include: path.resolve(__dirname, 'app'),
-        loader: 'style-loader!css-loader'
       },
       {
         test: /\.js[x]?$/,
@@ -42,7 +44,7 @@ module.exports = {
         loader: 'babel-loader'
       },
       {
-        test: /\.(png|jpg|svg)$/,
+        test: /\.(png|jpg|svg|gif)$/,
         loader: 'file-loader?name=[name].[ext]&publicPath=assets/images/&outputPath=assets/images/'
       }
     ]
@@ -65,7 +67,12 @@ module.exports = {
       }
     }),
     new CopyWebpackPlugin([
-      {from: './app/index.html', to: 'index.html'}
+      {
+        from: './app/index.html', to: 'index.html'
+      },
+      {
+        from: './app/assets/config.js', to: './assets/config.js'
+      }
     ]),
     extractCSS
   ]

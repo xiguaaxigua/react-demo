@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 11</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="-2.57571742e-14" width="18" height="7"></rect>
+    </defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-11">
+            <g id="web_clear_normal_right">
+                <g>
+                    <rect id="Rectangle-Copy-2" x="0" y="0" width="24" height="24"></rect>
+                    <g id="Group-79" transform="translate(3.000000, 1.000000)">
+                        <rect id="Rectangle-25" fill="#25BE93" x="7" y="0" width="4" height="11.3333333"></rect>
+                        <path d="M0,11.7417604 C0,11.46575 0.215488188,11.1896781 0.477407853,11.1260832 L6.94572566,9.55555556 L11.1054875,9.55555556 L17.5151913,11.1234119 C17.7829437,11.1889059 18,11.4671337 18,11.7417604 L18,14.1111111 L0,14.1111111 L0,11.7417604 Z" id="Rectangle-26" fill="#25BE93"></path>
+                        <g id="Rectangle-77" transform="translate(0.000000, 15.000000)">
+                            <mask id="mask-2" fill="white">
+                                <use xlink:href="#path-1"></use>
+                            </mask>
+                            <use id="Mask" fill="#25BE93" transform="translate(9.000000, 3.500000) scale(1, -1) translate(-9.000000, -3.500000) " xlink:href="#path-1"></use>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

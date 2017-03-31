@@ -1,0 +1,67 @@
+.icon {
+  display: inline-block;
+  vertical-align: middle;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon24 {
+  width: 24px;
+  height: 24px;
+}
+
+.icon-arrow-down {
+  @extend .icon24;
+  background: url("../assets/images/arrow_down.svg");
+}
+
+.icon-phone{
+  @extend .icon24;
+  background: url("../assets/images/phone_icon.svg");
+}
+
+.icon-phone-active{
+  @extend .icon24;
+  background: url("../assets/images/phone_icon_active.svg");
+}
+
+.icon-phone-locked{
+  @extend .icon24;
+  background: url("../assets/images/phone_icon_locked.svg");
+}
+
+.icon-phone-locked-active{
+  @extend .icon24;
+  background: url("../assets/images/phone_icon_locked_active.svg");
+}
+
+.icon-refresh{
+  @extend .icon24;
+  background: url("../assets/images/refresh.svg");
+}
+
+.icon-clear{
+  @extend .icon24;
+  background: url("../assets/images/clear.svg");
+}
+
+.icon-bell{
+  @extend .icon24;
+  background: url("../assets/images/bell.svg");
+}
+//
+//.icon-belling{
+//  @extend .icon24;
+//  background: url("../assets/images/belling.gif");
+//}
+
+.icon-lock{
+  @extend .icon24;
+  background: url("../assets/images/lock.svg");
+}
+
+.icon-erase{
+  @extend .icon24;
+  background: url("../assets/images/erase.svg");
+}

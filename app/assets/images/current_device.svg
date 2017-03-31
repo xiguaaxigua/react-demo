@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="62px" height="78px" viewBox="0 0 62 78" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 6</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M54.095202,51.6792092 C59.0106263,46.1932272 62,38.9457164 62,31 C62,13.8791728 48.1208272,0 31,0 C13.8791728,0 0,13.8791728 0,31 C0,38.8132612 2.89053863,45.9514009 7.66058806,51.4033914 L31,78 L54.0951966,51.6792152 Z" id="path-1"></path>
+        <filter x="-50%" y="-50%" width="200%" height="200%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="3" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.1 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-6">
+            <g>
+                <g id="web_-phone-position_normal_right">
+                    <g id="Group-14">
+                        <g>
+                            <g id="Combined-Shape">
+                                <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                                <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-1"></use>
+                            </g>
+                            <path d="M31,59 C46.463973,59 59,46.463973 59,31 C59,15.536027 46.463973,3 31,3 C15.536027,3 3,15.536027 3,31 C3,46.463973 15.536027,59 31,59 Z" id="Oval-4" fill="#25BE93"></path>
+                        </g>
+                    </g>
+                </g>
+                <g id="zs_svg_phone-copy" transform="translate(13.000000, 13.000000)">
+                    <path d="M9,4.5 L27,4.5 L27,31.5 L9,31.5 L9,4.5 Z M11.25,7.875 L11.25,26.1 L24.75,26.1 L24.75,7.875 L11.25,7.875 Z" id="Combined-Shape" fill="#FFFFFF"></path>
+                    <rect id="zs_svg_phone" x="0" y="0" width="36" height="36"></rect>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
