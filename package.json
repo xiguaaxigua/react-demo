@@ -4,8 +4,6 @@
   "description": "nothing",
   "main": "app/main.js",
   "scripts": {
-    "precommit": "npm run lint",
-    "commitmsg": "npm run lint:msg",
     "lint": "eslint --cache --ignore-path .gitignore --ext .jsx,.js --format=node_modules/eslint-formatter-pretty .",
     "lint:msg": "validate-commit-msg",
     "test": "npm run lint",
@@ -85,23 +83,5 @@
   "author": "go_songs@163.com",
   "license": "MIT",
   "config": {
-    "validate-commit-msg": {
-      "types": [
-        "feat",
-        "fix",
-        "docs",
-        "style",
-        "refactor",
-        "perf",
-        "test",
-        "chore",
-        "revert"
-      ],
-      "warnOnFail": false,
-      "maxSubjectLength": 100
-    },
-    "commitizen": {
-      "path": "node_modules/cz-conventional-changelog"
-    }
   }
 }
