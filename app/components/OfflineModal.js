@@ -30,7 +30,7 @@ class OfflineModal extends Component {
             <i className="icon icon-clear"/>
           </div>
           <div className="modal-content">
-            {name}处于离线状态，你仍然可以对设备进行锁定和擦除，等设备连接网络或上线后，立即进行修改。
+            {name}暂时无法定位，你仍然可以对设备进行锁定和擦除，等设备连接网络或上线后，立即进行修改。
           </div>
           <div className="modal-footer">
             <div className="device-lost">

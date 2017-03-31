@@ -26,7 +26,7 @@ class DeviceList extends Component {
 
   checkDevice(device) {
     const {dispatch} = this.props;
-    if (device.Lon && device.Lat) {
+    if (device.Lon && device.Lat && device.Lon != '0' && device.Lat != '0') {
       dispatch(setCurDevice(device));
       dispatch(setCurrentModal(''));
       dispatch(setCurLocTime(null));

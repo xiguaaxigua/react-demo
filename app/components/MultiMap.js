@@ -16,7 +16,7 @@ import {
   otherIconOffline,
   otherIconOfflineLocked
 } from '../constants/Config';
-import {getList, setCurDevice, setNoDevice, setCurrentModal} from '../actions/index';
+import {getList, setCurDevice, getOneLoc, setCurrentModal} from '../actions/index';
 import {convertFrom} from '../utils/convertFrom.js';
 
 class MultiMap extends Component {
@@ -33,11 +33,6 @@ class MultiMap extends Component {
     }
   }
 
-  componentWillMount() {
-    // const {dispatch} = this.props;
-    // dispatch(getList());
-  }
-
   componentWillReceiveProps(newProps) {
     const {dispatch} = this.props;
     let finalList = [];
@@ -52,15 +47,26 @@ class MultiMap extends Component {
     if (newProps.curDevice && this.props.curDevice) {
       // 切换设备, 改变地图中心点
       if (this.props.curDevice.UDID !== newProps.curDevice.UDID) {
+        let lon, lat;
+        if (!newProps.curDevice.Lon || newProps.curDevice.Lon == "0" || !newProps.curDevice.Lat || newProps.curDevice.Lat == "0") {
+          lon = 116.397428;
+          lat = 39.90923;
+        } else {
+          lon = newProps.curDevice.Lon;
+          lat = newProps.curDevice.Lat;
+        }
+
         this.setState({
-          mapCenter: {longitude: newProps.curDevice.Lon || 116.397428, latitude: newProps.curDevice.Lat || 39.90923}
+          mapCenter: {longitude: lon, latitude: lat}
         });
         if (this.state.ins.getZoom() === 3) {
           this.state.ins.setZoom(13)
         }
 
-        if (!newProps.curDevice.Lat || !newProps.curDevice.Lon) {
-          dispatch(setCurrentModal('InfoWindowModal'))
+        if (!newProps.curDevice.Lat || newProps.curDevice.Lat == '0' || !newProps.curDevice.Lon || newProps.curDevice.Lon == '0') {
+          dispatch(setCurrentModal('InfoWindowModal'));
+        }else{
+          dispatch(setCurrentModal(''));
         }
       }
     }
@@ -187,7 +193,7 @@ class MultiMap extends Component {
           <i className="icon_clear" onClick={this.closeModal} style={{top: '6px'}}/>
         </div>
         <div className="modal-content">
-          {deviceName}处于离线状态，你仍然可以对设备进行锁定和擦除，等设备连接网络或上线后，立即进行修改。
+          {deviceName}没有位置信息，你仍然可以对设备进行锁定和擦除，等设备连接网络或上线后，立即进行修改。
         </div>
         <div className="modal-footer" style={{padding: "0 24px"}}>
           <InfoWindowContent onlyHandle={true} {...this.props}/>
@@ -197,19 +203,23 @@ class MultiMap extends Component {
   }
 
   render() {
+    const {dispatch, curLocTime, curDevice, list} = this.props;
+    if (curLocTime) return false;
     const mapEvents = {
       click: () => {
         console.log('click')
       },
       created: (ins) => {
+        console.log(curDevice.UDID)
+        if (!curDevice.Lat || curDevice.Lat == '0' || !curDevice.Lon || curDevice.Lon == '0') {
+          // dispatch(getOneLoc([curDevice.UDID]));
+          dispatch(setCurrentModal('InfoWindowModal'));
+        }
         this.setState({
           ins
         });
       }
     };
-
-    let {list, curDevice} = this.props;
-
     let marker = <div></div>;
     let infoWindow = <div></div>;
     if (list && curDevice) {
@@ -219,9 +229,9 @@ class MultiMap extends Component {
         infoWindow = this.renderInfoWindow();
       } else {
         // 显示当前城市
-        this.state.ins.setZoom();
-        this.state.ins.setCenter();
-        this.state.ins.clearMap(); // 清除其他覆盖物
+        // this.state.ins.setZoom();
+        // this.state.ins.setCenter();
+        // this.state.ins.clearMap(); // 清除其他覆盖物
       }
     }
 

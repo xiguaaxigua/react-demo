@@ -142,12 +142,18 @@ export const getList = () => (dispatch) => {
         let udids = [];
         if (list.Count) {
           dispatch(noDeviceAction(false));
+          let emptyLocUdidArr = [];
           for (let i = 0; i < list.Locations.length; i++) {
             // 在线设备有定位中的 loading
             if (list.Locations[i].OnlineStatus) {
               list.Locations[i].isPosi = true;
             } else {
               list.Locations[i].isPosi = false;
+            }
+
+            // 收集坐标为空的设备
+            if (!list.Locations[i].Lat || !list.Locations[i].Lon || list.Locations[i].Lat == '0' || list.Locations[i].Lon == '0') {
+              emptyLocUdidArr.push(list.Locations[i].UDID);
             }
 
             // 坐标转换, 如果转换失败, 则使用未转换的坐标
@@ -161,6 +167,12 @@ export const getList = () => (dispatch) => {
 
             udids.push(list.Locations[i].UDID);
           }
+
+          // 坐标为空的设备, 开始定位
+          if (emptyLocUdidArr.length) {
+            // dispatch(getOneLoc(emptyLocUdidArr));
+          }
+
           dispatch(curDeviceAction(list.Locations[0]));
           dispatch(listAction(list));
 
@@ -182,6 +194,7 @@ export const getList = () => (dispatch) => {
                 let limit = 1; // 最大循环次数
                 let overtime = 2; //超时次数
                 let recentLocation = {};
+                let isFirst = true;
                 // 循环 Status
                 const loopStatus = setIntervalAndExecute(() => {
                   // if(limit = 0){
@@ -216,7 +229,7 @@ export const getList = () => (dispatch) => {
 
                                 let udid = res3.Data.Locations[i].UDID;
                                 // 定位时间更改时, 转换坐标
-                                if (recentLocation[udid]) {
+                                if (recentLocation[udid] && recentLocation[udid].LastLon === res3.Data.Locations[i].Lon) {
                                   list.Locations[j].Lon = recentLocation[udid].Lon;
                                   list.Locations[j].Lat = recentLocation[udid].Lat;
                                 } else {
@@ -230,15 +243,23 @@ export const getList = () => (dispatch) => {
 
                                     // 存储转换后的坐标, 防止重复获取
                                     recentLocation[udid] = {
+                                      LastLon: res3.Data.Locations[i].Lon,
+                                      LastLat: res3.Data.Locations[i].Lat,
                                       Lon: list.Locations[j].Lon,
                                       Lat: list.Locations[j].Lat
                                     };
+
+                                    console.log(isFirst)
+                                    if(!isFirst){
+                                      dispatch(setCurrentModal(''));
+                                    }
                                   }
                                 }
 
                                 list.Locations[j].isPosi = false;
                                 list.Count = res3.Data.Count;
                                 list.LocationsTime = +new Date();
+                                isFirst = false;
                               }
                             }
                           }
@@ -265,7 +286,6 @@ export const getList = () => (dispatch) => {
       } else {
         ThrowErr(res);
       }
-      return res;
     })
     .catch(error => {
       throw(error);

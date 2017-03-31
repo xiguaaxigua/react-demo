@@ -132,8 +132,19 @@ class InfoWindowContent extends Component {
       }
 
       if (this.props.onlyHandle) {
+        let bell = <div></div>;
+        if(curDevice.OnlineStatus){
+          // 现在没位置也可以响铃
+          bell = (
+            <div className={`handle-item`} onClick={this.openModal.bind(this, 'BellModal')}>
+              <p id="Belling"><i className="icon_bell"/></p>
+              <p><span>响铃</span></p>
+            </div>
+          );
+        }
         return (
           <div className="only-handle">
+            {bell}
             <div className={`handle-item`} onClick={this.openModal.bind(this, 'LockModal')}>
               <p><i className="icon_lock"/></p>
               <p><span>锁定</span></p>
@@ -143,7 +154,7 @@ class InfoWindowContent extends Component {
               <p><span>擦除</span></p>
             </div>
           </div>
-        )
+        );
       } else {
         return (
           <div className={`custom-info-window ${deviceStatus}`}>

@@ -19,7 +19,7 @@ if (process.env.NODE_ENV == "production") {
 } else {
   // 开发
   ServiceToken = 'd19352cc43d1222e01b792268df48a2e43d1222e01b79226';
-  DEV_API = 'http://10.0.53.28:8000';
+  DEV_API = 'http://10.0.53.28:8090';
   // cookie.save('uid', '74458365');
   // cookie.save('AccountID', '74458365');
   // cookie.save('ServiceToken', 'd19352cc43d1222e01b792268df48a2e43d1222e01b79226');

@@ -27,27 +27,39 @@ class HeadLogo extends Component {
                  trigger={toggleTrigger}>
           <div className="nav">
             <a href="/contact" className="nav-item">
-              <div className="hl hl-contact-logo hl-54"></div>
+              <div className="item-logo">
+                <div className="hl hl-contact-logo hl-54"></div>
+              </div>
               <p>联系人</p>
             </a>
             <a href="/sms" className="nav-item">
-              <div className="hl hl-msg-logo hl-54"></div>
+              <div className="item-logo">
+                <div className="hl hl-msg-logo hl-54"></div>
+              </div>
               <p>短信</p>
             </a>
             <a href="/record" className="nav-item">
-              <div className="hl hl-record-logo hl-54"></div>
+              <div className="item-logo">
+                <div className="hl hl-record-logo hl-54"></div>
+              </div>
               <p>通话记录</p>
             </a>
             <a href="/note" className="nav-item">
-              <div className="hl hl-note-logo hl-54"></div>
+              <div className="item-logo">
+                <div className="hl hl-note-logo hl-54"></div>
+              </div>
               <p>点滴笔记</p>
             </a>
             <a href="/Login" className="nav-item">
-              <div className="hl hl-find-logo hl-54"></div>
+              <div className="item-logo">
+                <div className="hl hl-find-logo hl-54"></div>
+              </div>
               <p>查找手机</p>
             </a>
             <a href="/" className="nav-item">
-              <div className="hl hl-home-logo hl-54"></div>
+              <div className="item-logo">
+                <div className="hl hl-home-logo hl-54"></div>
+              </div>
               <p>首页</p>
             </a>
           </div>
