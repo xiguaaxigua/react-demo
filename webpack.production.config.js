@@ -22,7 +22,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'build'),
     publicPath: '/',
-    filename: './bundle.[hash].js'
+    filename: './bundle.[chunkhash:8].js'
   },
   module: {
     loaders: [
