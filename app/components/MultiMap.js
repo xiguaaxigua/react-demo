@@ -269,7 +269,6 @@ class MultiMap extends Component {
       }
     }
 
-    console.log('render mmmmmap')
     return (
       <div className="map-container">
         <div id="map-area">

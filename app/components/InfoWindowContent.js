@@ -30,8 +30,7 @@ class InfoWindowContent extends Component {
     // console.info(newProps)
     let d = list[curDevice];
     if (newProps.curDevice === curDevice) {
-
-      if (curLocTime && serverTime - curLocTime > 10000) {
+      if (curLocTime && serverTime - curLocTime > 3000 && newProps.list[curDevice].LocationTime <= curLocTime) {
         console.log('超时, 暂时无法定位');
         ThrowMsg('暂时无法定位');
         dispatch(setCurLocTime(null));
@@ -46,6 +45,10 @@ class InfoWindowContent extends Component {
         for (let udid in newProps.newList) {
           if (udid === curDevice) {
             let c = newProps.newList[udid];
+
+            // if(c.LocationTime > curLocTime){
+            //   dispatch(setCurLocTime(null));
+            // }
 
             if (c.BellState === 3 && c.BellTime > curBellTime) {
               console.log('设备正在响铃');

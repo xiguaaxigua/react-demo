@@ -246,7 +246,7 @@ export const getList = () => (dispatch) => {
                         }
 
                         if (isNewLoc) {
-                          console.log('new list coming')
+                          dispatch(setCurLocTime(null));
                           dispatch(newListAction(correctList));
                         }
                       } else {

@@ -14,13 +14,13 @@ class Side extends Component {
     const {list} = this.props;
     let deviceNum = 0;
     let onlineNum = 0;
-    if (list && list.Locations) {
-      list.Locations.map((device, i) => {
+    if (list) {
+      for(let udid in list){
         deviceNum++;
-        if (device.OnlineStatus) {
+        if(list[udid].OnlineStatus){
           onlineNum++;
         }
-      })
+      }
     }
     return (
       <div className="side-container">
