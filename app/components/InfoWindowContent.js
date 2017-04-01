@@ -30,7 +30,7 @@ class InfoWindowContent extends Component {
     // console.info(newProps)
     let d = list[curDevice];
     if (newProps.curDevice === curDevice) {
-      if (curLocTime && serverTime - curLocTime > 3000 && newProps.list[curDevice].LocationTime <= curLocTime) {
+      if (curLocTime && serverTime - curLocTime > 60000 && newProps.list[curDevice].LocationTime <= curLocTime) {
         console.log('超时, 暂时无法定位');
         ThrowMsg('暂时无法定位');
         dispatch(setCurLocTime(null));
