@@ -5,7 +5,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const uglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
 
-const extractCSS = new ExtractTextPlugin('./bundle.css');
+const extractCSS = new ExtractTextPlugin('./bundle.[chunkhash:8].css');
 
 module.exports = {
   devtool: 'cheap-source-map',
