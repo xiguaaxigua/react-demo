@@ -5,7 +5,8 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const uglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
 
-const extractCSS = new ExtractTextPlugin('./bundle.css');
+let version = +new Date();
+const extractCSS = new ExtractTextPlugin('./bundle.css' + '?v=' + version);
 
 module.exports = {
   devtool: 'cheap-source-map',
@@ -22,7 +23,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'build'),
     publicPath: '/',
-    filename: './bundle.js'
+    filename: './bundle.js' + '?v=' + version
   },
   module: {
     loaders: [
