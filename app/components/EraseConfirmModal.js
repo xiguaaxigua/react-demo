@@ -55,13 +55,14 @@ class EraseConfirmModal extends Component {
     }
     this.setState({
       userPsdErr
-    })
+    });
   }
 
   closeModal() {
-    const {dispatch, curDevice} = this.props;
-    if(curDevice){
-      if(curDevice.Lon && curDevice.Lat){
+    const {dispatch, curDevice, list} = this.props;
+    let d = list[curDevice];
+    if(d){
+      if(+d.Lat && +d.Lon){
         dispatch(setCurrentModal(''));
       }else{
         dispatch(setCurrentModal('InfoWindowModal'));

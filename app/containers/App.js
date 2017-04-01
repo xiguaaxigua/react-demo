@@ -77,12 +77,14 @@ class App extends Component {
             <OfflineModal {...this.props}/>
 
             <LockModal
+              list={this.props.list}
               curDevice={this.props.curDevice}
               dispatch={this.props.dispatch}
               currentModal={this.props.currentModal}/>
 
             <EraseModal {...this.props}/>
             <EraseConfirmModal
+              list={this.props.list}
               curDevice={this.props.curDevice}
               dispatch={this.props.dispatch}
               currentModal={this.props.currentModal}/>
@@ -115,7 +117,7 @@ class App extends Component {
 
 const mapStateToProps = state => {
   const {phoneReducer} = state;
-  const {list, newList, curDevice, currentModal, curLocTime, curLockTime, curBellTime, curEraseTime, noDevice} = phoneReducer;
+  const {list, newList, curDevice, currentModal, curLocTime, curLockTime, curBellTime, curEraseTime, noDevice, serverTime} = phoneReducer;
   return {
     list,
     newList,
@@ -125,7 +127,8 @@ const mapStateToProps = state => {
     curLockTime,
     curBellTime,
     curEraseTime,
-    noDevice
+    noDevice,
+    serverTime
   }
 };
 

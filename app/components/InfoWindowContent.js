@@ -26,62 +26,65 @@ class InfoWindowContent extends Component {
   }
 
   componentWillReceiveProps(newProps) {
-    const {dispatch} = this.props;
-    let udid = this.props.curDevice.UDID;
-    if (newProps.curDevice.UDID === this.props.curDevice.UDID) {
-      if (this.props.curLocTime && this.props.curDevice.LocationTime >= this.props.curLocTime) {
-        // 单个定位成功
+    const {dispatch, curDevice, list, curLocTime, curLockTime, curBellTime, serverTime} = this.props;
+    // console.info(newProps)
+    let d = list[curDevice];
+    if (newProps.curDevice === curDevice) {
+
+      if (curLocTime && serverTime - curLocTime > 10000) {
+        console.log('超时, 暂时无法定位');
+        ThrowMsg('暂时无法定位');
         dispatch(setCurLocTime(null));
       }
 
-      if (newProps.newList && newProps.newList.Count) {
-        if (newProps.newList.LocationTime - this.props.curLocTime > 60) {
-          // ThrowErr('超时');
-        }
+      if (newProps.newList) {
+        // if (newProps.newList.LocationTime - curLocTime > 10000) {
+        //   console.log('超时')
+        //   ThrowMsg('超时');
+        // }
 
-        for (let i = 0; i < newProps.newList.Locations.length; i++) {
-          if (newProps.newList.Locations[i].UDID === udid) {
-            // 替换 curDevice 为 newList 中的
-            dispatch(setCurDevice(newProps.newList.Locations[i]));
-          }
+        for (let udid in newProps.newList) {
+          if (udid === curDevice) {
+            let c = newProps.newList[udid];
 
-          if (newProps.newList.Locations[i].LockState === 1 && newProps.newList.Locations[i].LockTime > this.props.curLockTime) {
-            console.log('锁定成功');
-            ThrowMsg('锁定成功');
-            dispatch(setCurLockTime(newProps.newList.Locations[i].LockTime));
-          }
+            if (c.BellState === 3 && c.BellTime > curBellTime) {
+              console.log('设备正在响铃');
+              ThrowMsg('设备正在响铃');
+              // $('#Belling').html('Hi'); // todo 响铃动画
+              dispatch(setBellTime(c.BellTime));
+            }
 
-          if (this.props.curLockTime && newProps.newList.Locations[i].LockState === 0 && newProps.newList.Locations[i].LockTime > this.props.curLockTime) {
-            console.log('设备已解锁');
-            ThrowMsg('设备已解锁');
-            dispatch(setCurLockTime(''));
-          }
+            if (curBellTime && c.BellState === 2 && c.BellTime > curBellTime) {
+              console.log('手机端的响铃已停止');
+              ThrowMsg('手机端的响铃已停止');
+              // $('#Belling').html('<i className="icon_bell"></i>');
+              dispatch(setBellTime(''));
+            }
 
-          if (newProps.newList.Locations[i].BellState === 3 && newProps.newList.Locations[i].BellTime > this.props.curBellTime) {
-            console.log('响铃成功');
-            ThrowMsg('响铃成功');
-            // $('#Belling').html('Hi'); // todo 响铃动画
-            dispatch(setBellTime(newProps.newList.Locations[i].BellTime));
-          }
+            if (curBellTime && c.BellState === 1 && c.BellTime > curBellTime) {
+              console.log('手机端的响铃已人为关闭');
+              ThrowMsg('手机端的响铃已人为关闭');
+              // $('#Belling').html('<i className="icon_bell"></i>');
+              dispatch(setBellTime(''));
+            }
 
-          if (this.props.curBellTime && newProps.newList.Locations[i].BellState === 2 && newProps.newList.Locations[i].BellTime > this.props.curBellTime) {
-            console.log('响铃已自动关闭');
-            ThrowMsg('响铃已自动关闭');
-            // $('#Belling').html('<i className="icon_bell"></i>');
-            dispatch(setBellTime(''));
-          }
+            if (c.LockState === 1 && c.LockTime > curLockTime) {
+              console.log('已成功锁定手机');
+              ThrowMsg('已成功锁定手机');
+              dispatch(setCurLockTime(c.LockTime));
+            }
 
-          if (this.props.curBellTime && newProps.newList.Locations[i].BellState === 1 && newProps.newList.Locations[i].BellTime > this.props.curBellTime) {
-            console.log('响铃已人为关闭');
-            ThrowMsg('响铃已人为关闭');
-            // $('#Belling').html('<i className="icon_bell"></i>');
-            dispatch(setBellTime(''));
-          }
+            if (curLockTime && c.LockState === 0 && c.LockTime > curLockTime) {
+              console.log('手机端的锁定已被人为破解');
+              ThrowMsg('手机端的锁定已被人为破解');
+              dispatch(setCurLockTime(''));
+            }
 
-          if (newProps.newList.Locations[i].EraseState === 1 && newProps.newList.Locations[i].EraseTime > this.props.curEraseTime) {
-            console.log('擦除成功');
-            ThrowMsg('擦除成功');
-            dispatch(setEraseTime());
+            if (c.EraseState === 1 && c.EraseTime > curEraseTime) {
+              console.log('已成功擦除手机');
+              ThrowMsg('已成功擦除手机');
+              dispatch(setEraseTime());
+            }
           }
         }
       }
@@ -89,31 +92,39 @@ class InfoWindowContent extends Component {
   }
 
   openModal(whichModal) {
-    const {dispatch, curDevice} = this.props;
-    if (whichModal === 'BellModal' && !curDevice.OnlineStatus) {
+    const {dispatch, curDevice, list} = this.props;
+    let d = list[curDevice];
+    if (whichModal === 'BellModal' && !d.OnlineStatus) {
       return false;
     }
     dispatch(setCurrentModal(whichModal));
   }
 
   refresh(udid) {
-    const {dispatch, curLocTime} = this.props;
+    const {dispatch, curLocTime, curDevice, list} = this.props;
+    let d = list[curDevice];
     if (curLocTime) return false;
-    dispatch(getOneLoc([udid]));
+    if (d.OnlineStatus) {
+      // 只有在线设备可以定位
+      dispatch(getOneLoc([udid]));
+    } else {
+      ThrowMsg('查找不到手机，暂时无法定位');
+    }
   }
 
   render() {
     let bellingClass = this.state.belling ? 'belling' : '';
-    let {curDevice, curLocTime} = this.props;
+    let {curDevice, curLocTime, list} = this.props;
     if (curDevice) {
+      let d = list[curDevice];
       let deviceStatus;
-      if (curDevice.isPosi) {
+      if (d.isPosi) {
         deviceStatus = 'positioning';
       } else {
         if (curLocTime) {
           deviceStatus = 'positioning';
         } else {
-          if (curDevice.OnlineStatus) {
+          if (d.OnlineStatus) {
             deviceStatus = 'online';
           } else {
             deviceStatus = 'offline';
@@ -123,17 +134,20 @@ class InfoWindowContent extends Component {
 
       let infoName;
       let spin;
+      infoName = formatTime(d.LocationTime);
+      spin = '';
+
       if (deviceStatus === 'positioning') {
         infoName = '定位中...';
         spin = 'spin';
-      } else {
-        infoName = formatTime(curDevice.LocationTime);
-        spin = '';
+      } else if (!+d.Lon || !+d.Lat) {
+        infoName = '暂时无法定位';
       }
+
 
       if (this.props.onlyHandle) {
         let bell = <div></div>;
-        if(curDevice.OnlineStatus){
+        if (d.OnlineStatus) {
           // 现在没位置也可以响铃
           bell = (
             <div className={`handle-item`} onClick={this.openModal.bind(this, 'BellModal')}>
@@ -159,9 +173,9 @@ class InfoWindowContent extends Component {
         return (
           <div className={`custom-info-window ${deviceStatus}`}>
             <div className="info-window-title">
-              <p className="info-name">{curDevice.DeviceName || curDevice.UDID}</p>
-              <span className="info-time">{infoName}</span>
-              <i className={`icon_refresh ${spin}`} onClick={this.refresh.bind(this, curDevice.UDID)}/>
+              <p className="info-name">{d.DeviceName || d.UDID}</p>
+              <p className="info-time">{infoName}</p>
+              <i className={`icon_refresh ${spin}`} onClick={this.refresh.bind(this, d.UDID)}/>
             </div>
             <div className="info-window-content">
               <div className={`handle-item`} onClick={this.openModal.bind(this, 'BellModal')}>

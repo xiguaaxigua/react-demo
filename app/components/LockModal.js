@@ -24,12 +24,12 @@ class LockModal extends Component {
     }
   }
 
-  componentWillReceiveProps(newProps){
+  componentWillReceiveProps(newProps) {
     this.setState({
       curDevice: newProps.curDevice,
       currentModal: newProps.currentModal
     });
-    if(newProps.currentModal !== 'LockModal'){
+    if (newProps.currentModal !== 'LockModal') {
       this.setState({
         curDevice: '',
         currentModal: '',
@@ -41,36 +41,38 @@ class LockModal extends Component {
     }
   }
 
-  closeModal(){
-    const {dispatch} = this.props;
-    if(this.props.curDevice){
-      if(this.props.curDevice.Lon && this.props.curDevice.Lat){
+  closeModal() {
+    const {dispatch, curDevice, list} = this.props;
+    let d = list[curDevice];
+    if (d) {
+      if (+d.Lon && +d.Lat) {
         dispatch(setCurrentModal(''));
-      }else{
+      } else {
         dispatch(setCurrentModal('InfoWindowModal'));
       }
     }
   }
 
   fireLock() {
-    if(this.state.psdValue.length !== 4){
+    if (this.state.psdValue.length !== 4) {
       this.setState({
         psdErr: true
       });
       return false;
-    }else{
+    } else {
       this.setState({
         psdErr: false
       })
     }
 
-    const {dispatch} = this.props;
-    const curDevice = this.state.curDevice;
-    let udid = curDevice.UDID;
+    const {dispatch, curDevice, list} = this.props;
+    console.log(list)
+    let d = list[curDevice];
+    let udid = d.UDID;
     let psd = this.state.psdValue;
     let info = this.state.lockInfo;
-    let isOnline = curDevice.OnlineStatus;
-    dispatch(fireLock(udid, psd, info, isOnline, curDevice));
+    let isOnline = d.OnlineStatus;
+    dispatch(fireLock(udid, psd, info, isOnline, d));
   }
 
   checkPsd() {
@@ -104,9 +106,9 @@ class LockModal extends Component {
       lockInfo: e.target.value
     });
     let lockErr;
-    if(e.target.value.length > 70){
+    if (e.target.value.length > 70) {
       lockErr = true;
-    }else{
+    } else {
       lockErr = false;
     }
     this.setState({

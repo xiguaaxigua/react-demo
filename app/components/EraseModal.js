@@ -12,9 +12,10 @@ class EraseModal extends Component{
   }
 
   closeModal(){
-    const {dispatch} = this.props;
-    if(this.props.curDevice){
-      if(this.props.curDevice.Lon && this.props.curDevice.Lat){
+    const {dispatch, curDevice, list} = this.props;
+    let d = list[curDevice];
+    if(d){
+      if(+d.Lon && +d.Lat){
         dispatch(setCurrentModal(''));
       }else{
         dispatch(setCurrentModal('InfoWindowModal'));

@@ -24,26 +24,25 @@ class DeviceList extends Component {
     });
   }
 
-  checkDevice(device) {
+  checkDevice(d) {
     const {dispatch} = this.props;
-    if (device.Lon && device.Lat && device.Lon != '0' && device.Lat != '0') {
-      dispatch(setCurDevice(device));
+    if (+d.Lon && +d.Lat) {
       dispatch(setCurrentModal(''));
-      dispatch(setCurLocTime(null));
     } else {
-      dispatch(setCurDevice(device));
+      // 无效位置数据
       dispatch(setCurrentModal('InfoWindowModal'));
-      dispatch(setCurLocTime(null));
     }
+    dispatch(setCurLocTime(null));
+    dispatch(setCurDevice(d.UDID));
   }
 
   renderDeviceList() {
     const {list, curDevice} = this.props;
     if (list && curDevice) {
       let deviceList = [];
-      for (let i = 0; i < list.Locations.length; i++) {
+      for (let udid in list) {
         // 设备列表状态
-        let device = list.Locations[i];
+        let device = list[udid];
 
         // 电量 && 在线信息
         let isOnline, isOnlineTxt, elec;
@@ -64,7 +63,7 @@ class DeviceList extends Component {
           isOnline = 'offline';
           isOnlineTxt = <span className="offline">离线</span>;
         }
-        let active = curDevice.UDID === device.UDID ? 'active' : '';
+        let active = curDevice === device.UDID ? 'active' : '';
 
         // 侧栏手机图标
         let deviceIcon;
@@ -90,7 +89,7 @@ class DeviceList extends Component {
         }
 
         deviceList.push(
-          <div key={i} className={`device-item ${active}`} onClick={this.checkDevice.bind(this, device)}>
+          <div key={udid} className={`device-item ${active}`} onClick={this.checkDevice.bind(this, device)}>
             <div className="device-icon">
               {deviceIcon}
             </div>

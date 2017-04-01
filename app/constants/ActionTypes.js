@@ -20,3 +20,4 @@ export const CUR_LOCK_TIME = 'CUR_LOCK_TIME';
 export const BELL_TIME = 'BELL_TIME';
 export const CUR_ERASE_TIME = 'CUR_ERASE_TIME';
 export const NO_DEVICE = 'NO_DEVICE';
+export const SERVER_TIME = 'SERVER_TIME';

@@ -43,6 +43,8 @@ const phoneReducer = (state = initialState, action) => {
       return {...state, curEraseTime: action.curEraseTime};
     case types.NO_DEVICE:
       return {...state, noDevice: action.noDevice};
+    case types.SERVER_TIME:
+      return {...state, serverTime: action.serverTime};
     default: {
       return {}
     }

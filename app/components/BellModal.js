@@ -5,31 +5,32 @@ import React, {Component, PropTypes} from 'react';
 import Modal from '../libs/Modal/index';
 import {setCurrentModal, fireBell} from '../actions/index';
 
-class BellModal extends Component{
-  constructor(props){
+class BellModal extends Component {
+  constructor(props) {
     super(props);
     this.closeModal = ::this.closeModal;
     this.fireBell = ::this.fireBell;
   }
 
-  fireBell(){
-    const {dispatch, curDevice} = this.props;
-    let udid = curDevice.UDID;
-    dispatch(fireBell(udid, curDevice));
+  fireBell() {
+    const {dispatch, curDevice, list} = this.props;
+    let d = list[curDevice];
+    dispatch(fireBell(curDevice, d));
   }
 
-  closeModal(){
-    const {dispatch} = this.props;
-    if(this.props.curDevice){
-      if(this.props.curDevice.Lon && this.props.curDevice.Lat){
+  closeModal() {
+    const {dispatch, curDevice, list} = this.props;
+    let d = list[curDevice];
+    if (d) {
+      if (+d.Lon && +d.Lat) {
         dispatch(setCurrentModal(''));
-      }else{
+      } else {
         dispatch(setCurrentModal('InfoWindowModal'));
       }
     }
   }
 
-  render(){
+  render() {
     return (
       <Modal
         isOpen={this.props.currentModal === 'BellModal'}

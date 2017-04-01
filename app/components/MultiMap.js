@@ -16,7 +16,7 @@ import {
   otherIconOffline,
   otherIconOfflineLocked
 } from '../constants/Config';
-import {getList, setCurDevice, getOneLoc, setCurrentModal} from '../actions/index';
+import {getList, setCurDevice, getOneLoc, setCurrentModal, setCurLocTime} from '../actions/index';
 import {convertFrom} from '../utils/convertFrom.js';
 
 class MultiMap extends Component {
@@ -29,7 +29,8 @@ class MultiMap extends Component {
       mapCenter: {longitude: 116.397428, latitude: 39.90923},
       infoWindowVisible: true,
       list: [],
-      ins: ''
+      ins: '',
+      isFirst: true
     }
   }
 
@@ -44,29 +45,49 @@ class MultiMap extends Component {
     this.setState({
       list: finalList
     });
+
     if (newProps.curDevice && this.props.curDevice) {
-      // 切换设备, 改变地图中心点
-      if (this.props.curDevice.UDID !== newProps.curDevice.UDID) {
-        let lon, lat;
-        if (!newProps.curDevice.Lon || newProps.curDevice.Lon == "0" || !newProps.curDevice.Lat || newProps.curDevice.Lat == "0") {
-          lon = 116.397428;
-          lat = 39.90923;
-        } else {
-          lon = newProps.curDevice.Lon;
-          lat = newProps.curDevice.Lat;
-        }
+      let device = newProps.list[newProps.curDevice];
 
-        this.setState({
-          mapCenter: {longitude: lon, latitude: lat}
-        });
-        if (this.state.ins.getZoom() === 3) {
-          this.state.ins.setZoom(13)
-        }
-
-        if (!newProps.curDevice.Lat || newProps.curDevice.Lat == '0' || !newProps.curDevice.Lon || newProps.curDevice.Lon == '0') {
-          dispatch(setCurrentModal('InfoWindowModal'));
-        }else{
+      if (newProps.list && newProps.curDevice) {
+        let nextD = newProps.list[newProps.curDevice];
+        if (+nextD.Lon && +nextD.Lat && this.props.currentModal === 'InfoWindowModal') {
+          // 正常显示
+          this.setState({
+            mapCenter: {longitude: nextD.Lon, latitude: nextD.Lat}
+          });
           dispatch(setCurrentModal(''));
+          dispatch(setCurLocTime(null));
+        }
+      }
+
+      if (this.state.isFirst) {
+        if (+device.Lat && +device.Lon) {
+
+        } else {
+          dispatch(setCurrentModal('InfoWindowModal'));
+          this.setState({
+            mapCenter: {longitude: 116.397428, latitude: 39.90923}
+          });
+        }
+      }
+
+      if (this.props.curDevice !== newProps.curDevice) {
+        this.setState({
+          isFirst: false
+        });
+        if (+device.Lat && +device.Lon) {
+          // 切换设备, 改变地图中心点
+          let curD = newProps.list[newProps.curDevice];
+          this.setState({
+            mapCenter: {longitude: curD.Lon, latitude: curD.Lat}
+          });
+        } else {
+          //无效位置
+          dispatch(setCurrentModal('InfoWindowModal'));
+          this.setState({
+            mapCenter: {longitude: 116.397428, latitude: 39.90923}
+          });
         }
       }
     }
@@ -76,23 +97,23 @@ class MultiMap extends Component {
    * markers
    */
   renderMarkers() {
-    let markerIcon, markerOffset, markers;
+    let markerIcon, markerOffset, markers = [];
     const {list, curDevice} = this.props;
 
     if (list && curDevice) {
-      let devices = list.Locations;
-      markers = devices.map((device, i) => {
-        // 设置 marker 样式
-        if (device.UDID === curDevice.UDID) {
+      let curD = list[curDevice];
+      for (let udid in list) {
+        let device = list[udid];
+        if (curD.UDID === device.UDID) {
           markerOffset = [-31, -78];
-          if (curDevice.LockState === 0) {
-            if (curDevice.OnlineStatus) {
+          if (curD.LockState === 0) {
+            if (curD.OnlineStatus) {
               markerIcon = currIcon; // 当前在线未锁定
             } else {
               markerIcon = currIconOffline; // 当前离线未锁定
             }
           } else {
-            if (curDevice.OnlineStatus) {
+            if (curD.OnlineStatus) {
               markerIcon = currIconLocked; // 当前在线锁定
             } else {
               markerIcon = currIconOfflineLocked; // 当前离线锁定
@@ -115,31 +136,36 @@ class MultiMap extends Component {
             }
           }
         }
+
         const markerEvents = {
           click: (e) => {
             let device = e.target.getExtData().device;
             const {dispatch} = this.props;
-            dispatch(setCurDevice(device));
-            if (!device.Lat || !device.Lon) {
+            dispatch(setCurDevice(device.UDID));
+            if (+device.Lat && +device.Lon) {
+              this.setState({
+                mapCenter: {longitude: device.Lon, latitude: device.Lat}
+              });
+            } else {
               dispatch(setCurrentModal('InfoWindowModal'))
             }
           }
         };
-
-        if (device.Lat && device.Lon && device.Lon !== "0" && device.Lat !== "0") {
-          return (
-            <Marker key={i}
+        if (+device.Lon && +device.Lat) {
+          let marker = (
+            <Marker key={udid}
                     extData={{device: device}}
                     position={{longitude: device.Lon, latitude: device.Lat}}
                     offset={markerOffset}
                     events={markerEvents}>
               <img src={markerIcon} alt=""/>
             </Marker>
-          )
+          );
+          markers.push(marker);
         } else {
-          return <Marker key={i} visible={false}/>
+          markers.push(<div key={udid}></div>);
         }
-      });
+      }
     }
     return markers;
   }
@@ -152,21 +178,20 @@ class MultiMap extends Component {
     let infoWindowOffset = [200, 40];
     const {list, curDevice} = this.props;
     if (list && curDevice) {
-      list.Locations.map((device, i) => {
-        if (device.UDID === curDevice.UDID) {
-          if (device.Lat && device.Lon) {
-            infoWindow = (
-              <InfoWindow
-                position={{longitude: device.Lon || 115, latitude: device.Lat || 30}}
-                visible={this.state.infoWindowVisible}
-                isCustom
-                offset={infoWindowOffset}>
-                <InfoWindowContent {...this.props}/>
-              </InfoWindow>
-            )
-          }
+      for (let udid in list) {
+        let d = list[udid];
+        if (udid === curDevice && +d.Lon && +d.Lat) {
+          infoWindow = (
+            <InfoWindow
+              position={{longitude: d.Lon || 115, latitude: d.Lat || 30}}
+              visible={this.state.infoWindowVisible}
+              isCustom
+              offset={infoWindowOffset}>
+              <InfoWindowContent {...this.props}/>
+            </InfoWindow>
+          )
         }
-      });
+      }
     }
     return infoWindow;
   }
@@ -177,44 +202,51 @@ class MultiMap extends Component {
   }
 
   renderInfoWindowModal() {
-    // <InfoWindowContent {...this.props}/>
-    const {currentModal, curDevice} = this.props;
+    const {currentModal, curDevice, list} = this.props;
     let deviceName = '';
-    if (curDevice) {
-      deviceName = curDevice.DeviceName || curDevice.UDID;
+    if (curDevice && list) {
+      let d = list[curDevice];
+      deviceName = d.DeviceName || d.UDID;
+      if (d.OnlineStatus) {
+        return (
+          <Modal
+            isOpen={currentModal === 'InfoWindowModal'}
+            contentLabel="Modal"
+          >
+            <InfoWindowContent {...this.props}/>
+          </Modal>
+        )
+      } else {
+        return (
+          <Modal
+            isOpen={currentModal === 'InfoWindowModal'}
+            contentLabel="Modal"
+          >
+            <div className="modal-header" style={{height: '36px'}}>
+              <i className="icon_clear" onClick={this.closeModal} style={{top: '6px'}}/>
+            </div>
+            <div className="modal-content">
+              {deviceName}处于离线状态，你仍然可以对设备进行锁定和擦除，等设备连接网络或上线后，立即进行修改。
+            </div>
+            <div className="modal-footer" style={{padding: "0 24px"}}>
+              <InfoWindowContent onlyHandle={true} {...this.props}/>
+            </div>
+          </Modal>
+        )
+      }
+    } else {
+      return <div></div>;
     }
-    return (
-      <Modal
-        isOpen={currentModal === 'InfoWindowModal'}
-        onRequestClose={this.closeAddModal}
-        contentLabel="Modal"
-      >
-        <div className="modal-header" style={{height: '36px'}}>
-          <i className="icon_clear" onClick={this.closeModal} style={{top: '6px'}}/>
-        </div>
-        <div className="modal-content">
-          {deviceName}没有位置信息，你仍然可以对设备进行锁定和擦除，等设备连接网络或上线后，立即进行修改。
-        </div>
-        <div className="modal-footer" style={{padding: "0 24px"}}>
-          <InfoWindowContent onlyHandle={true} {...this.props}/>
-        </div>
-      </Modal>
-    )
   }
 
   render() {
-    const {dispatch, curLocTime, curDevice, list} = this.props;
-    if (curLocTime) return false;
+    const {curDevice, list, dispatch} = this.props;
+
     const mapEvents = {
       click: () => {
         console.log('click')
       },
       created: (ins) => {
-        console.log(curDevice.UDID)
-        if (!curDevice.Lat || curDevice.Lat == '0' || !curDevice.Lon || curDevice.Lon == '0') {
-          // dispatch(getOneLoc([curDevice.UDID]));
-          dispatch(setCurrentModal('InfoWindowModal'));
-        }
         this.setState({
           ins
         });
@@ -223,18 +255,21 @@ class MultiMap extends Component {
     let marker = <div></div>;
     let infoWindow = <div></div>;
     if (list && curDevice) {
-      if (curDevice.Lat && curDevice.Lon && curDevice.Lat !== "0" && curDevice.Lon !== "0") { // 坐标为0
-        // 正常显示
+      let d = list[curDevice];
+      if (+d.Lon && +d.Lat) {
         marker = this.renderMarkers();
         infoWindow = this.renderInfoWindow();
+        // console.info('当前设备经纬度: ' + d.Lat + ',' + d.Lon);
       } else {
         // 显示当前城市
-        // this.state.ins.setZoom();
-        // this.state.ins.setCenter();
-        // this.state.ins.clearMap(); // 清除其他覆盖物
+        if (this.state.ins) {
+          this.state.ins.clearMap(); // 清除其他覆盖物
+        }
+        // console.log('当前设备经纬度无效, 默认为天安门坐标')
       }
     }
 
+    console.log('render mmmmmap')
     return (
       <div className="map-container">
         <div id="map-area">
